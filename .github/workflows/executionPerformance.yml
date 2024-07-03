@@ -21,7 +21,7 @@ jobs:
         uses: gradle/gradle-build-action@v3
 
       - name: Execute test
-        run: gradle gatlingRun --simulation=pokemonapi.PokemonApiTest
+        run: gradle gatlingRun --simulation=${{ inputs.testSuite }}
 
       - name: Save report
         if: ${{always()}}
