@@ -22,3 +22,10 @@ jobs:
 
       - name: Execute test
         run: gradle gatlingRun --simulation=pokemonapi.PokemonApiTest
+
+      - name: Save report
+        if: ${{always()}}
+        uses: actions/upload-artifact@v3.1.2
+        with:
+          name: gatling report
+          path: ./build/reports/gatling
