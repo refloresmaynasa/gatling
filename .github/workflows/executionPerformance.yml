@@ -8,6 +8,11 @@ on:
         description: 'testSuite'
         required: true
         default: 'pokemonapi.PokemonApiTest'
+      concurrent:
+        type: string
+        description: 'Quantity of users'
+        required: true
+        default: '5'
 
 jobs:
   execpokemonapi:
@@ -21,7 +26,7 @@ jobs:
         uses: gradle/gradle-build-action@v3
 
       - name: Execute test
-        run: gradle gatlingRun --simulation=${{ inputs.testSuite }}
+        run: gradle gatlingRun --simulation=${{ inputs.testSuite }} -DusersCount=${{ inputs.concurrent }}
 
       - name: Save report
         if: ${{always()}}
